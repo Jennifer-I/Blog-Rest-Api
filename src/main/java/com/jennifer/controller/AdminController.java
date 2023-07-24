@@ -39,10 +39,10 @@ public class AdminController {
         ResponseManager responseManager = postService.createPost(postRequest,request);
         return new ResponseEntity<>(responseManager,HttpStatus.OK);
     }
-//    @PatchMapping("/{postId}")
-//    public ResponseEntity<ResponseManager> updatePost( @PathVariable Long postId,@RequestBody PostRequest postRequest){
-//        ResponseManager responseManager = postService.updatePost(postRequest,postId);
-//        return  new ResponseEntity<>(responseManager,HttpStatus.OK);
-//    }
+   @PatchMapping("/{postId}")
+    public ResponseEntity<ResponseManager> updatePost( @PathVariable Long postId,@RequestBody PostRequest postRequest,HttpServletRequest request){
+        ResponseManager responseManager = postService.updatePost(postRequest,postId,request);
+        return  new ResponseEntity<>(responseManager,HttpStatus.OK);
+    }
 
 }

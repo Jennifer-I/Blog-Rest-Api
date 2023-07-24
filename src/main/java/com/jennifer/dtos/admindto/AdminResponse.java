@@ -1,10 +1,14 @@
 package com.jennifer.dtos.admindto;
 import com.jennifer.enums.Gender;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Builder
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AdminResponse {
     private Long id;
     private String UserName;

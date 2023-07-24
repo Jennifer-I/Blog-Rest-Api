@@ -9,5 +9,7 @@ import javax.servlet.http.HttpSession;
 public interface PostService {
     ResponseManager createPost(PostRequest postRequest, HttpServletRequest request);
 
+    ResponseManager updatePost(PostRequest postRequest, Long postId, HttpServletRequest request);
+
 //    ResponseManager updatePost(PostRequest postRequest, Long postId);
 }

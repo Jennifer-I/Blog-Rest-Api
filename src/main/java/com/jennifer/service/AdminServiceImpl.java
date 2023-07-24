@@ -43,7 +43,7 @@ public class AdminServiceImpl implements AdminService{
         }
             AdminResponse adminResponse = entityMapper.adminToDtoMapper(optionalAdmin.get());
             HttpSession httpSession = request.getSession();
-            httpSession.setAttribute("admin_id", adminResponse);
+            httpSession.setAttribute("admin_id", adminResponse.getId());
             return ResponseManager.builder().message("login successful").status("01").data(adminResponse).build();
         }
 

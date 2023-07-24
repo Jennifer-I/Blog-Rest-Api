@@ -23,7 +23,7 @@ public class PostServiceImpl implements PostService{
     private final AdminRepository adminRepository;
 
 
-    public PostServiceImpl(PostRepository postRepository,  AdminRepository adminRepository, HttpSession httpSession) {
+    public PostServiceImpl(PostRepository postRepository,  AdminRepository adminRepository) {
         this.postRepository = postRepository;
         this.adminRepository = adminRepository;
 
@@ -32,6 +32,7 @@ public class PostServiceImpl implements PostService{
     public ResponseManager createPost(PostRequest postRequest, HttpServletRequest request) {
         HttpSession session = request.getSession();
         AdminResponse adminResponse = (AdminResponse) session.getAttribute("admin_id");
+//        Long AdminId = (Long) session.getAttribute("admin_id");
         Optional<Admin> optionalAdmin = adminRepository.findById(adminResponse.getId());
         if (optionalAdmin.isEmpty()) {
             throw new UserNotFoundException();
@@ -47,13 +48,14 @@ public class PostServiceImpl implements PostService{
 
         }
         @Override
-        public ResponseManager updatePost(PostRequest postRequest, Long postId){
-        Long adminId = (Long) httpSession.getAttribute("admin_Id");
+        public ResponseManager updatePost(PostRequest postRequest, Long postId, HttpServletRequest request){
+         HttpSession session = request.getSession();
+        Long adminId = (Long) session.getAttribute("admin_id");
         Optional<Admin> optionalAdmin = adminRepository.findById(adminId);
-        if(optionalAdmin.isEmpty()) {
+        if (optionalAdmin.isEmpty()) {
             throw new UserNotFoundException();
         }
-         Optional<Post> optionalPost = postRepository.findById(postId);
+        Optional<Post> optionalPost = postRepository.findById(postId);
          if(optionalPost.isEmpty()){
              throw new NonexistentEntityException();
          }
